@@ -1,11 +1,16 @@
 package com.estudosweb.curso.recursos;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estudosweb.curso.entidades.Usuario;
+import com.estudosweb.curso.servicos.UsuarioServico;
 
 /*CONTROLADORES REST*/
 
@@ -13,9 +18,18 @@ import com.estudosweb.curso.entidades.Usuario;
 @RequestMapping(value = "/usuarios")
 public class UsuarioRecurso {
 	
+	@Autowired
+	private UsuarioServico servico;
+	
 	@GetMapping
-	public ResponseEntity<Usuario> retornaUsuarios(){
-		Usuario usuario = new Usuario(1L, "Wesley", "wesley_esc1987@hotmail.com", "11942466550", "123456");
+	public ResponseEntity<List<Usuario>> retornaUsuarios(){
+		List<Usuario> list = servico.retornaUsuarios();
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Usuario> retornaUsuarioPorId(@PathVariable Long id){
+		Usuario usuario = servico.retornaUsuarioPorId(id);
 		return ResponseEntity.ok().body(usuario);
 	}
 
