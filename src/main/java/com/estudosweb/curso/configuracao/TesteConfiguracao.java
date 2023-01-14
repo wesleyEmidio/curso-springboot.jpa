@@ -14,6 +14,7 @@ import com.estudosweb.curso.Repositorios.PedidoRepositorio;
 import com.estudosweb.curso.Repositorios.ProdutoRepositorio;
 import com.estudosweb.curso.Repositorios.UsuarioRepositorio;
 import com.estudosweb.curso.entidades.Categoria;
+import com.estudosweb.curso.entidades.Pagamento;
 import com.estudosweb.curso.entidades.Pedido;
 import com.estudosweb.curso.entidades.PedidoItem;
 import com.estudosweb.curso.entidades.Produto;
@@ -80,6 +81,11 @@ public class TesteConfiguracao implements CommandLineRunner{
 		PedidoItem pi4 = new PedidoItem(p3, pr5, 2, pr5.getPreco());
 		
 		pedidoItemRepositorio.saveAll(Arrays.asList(pi1, pi2, pi3, pi4));
+		
+		Pagamento pag1 = new Pagamento(null, Instant.parse("2019-06-20T21:53:07Z"), p1);
+		p1.setPagamento(pag1);
+		
+		pedidoRepositorio.save(p1);
 	}
 
 }
