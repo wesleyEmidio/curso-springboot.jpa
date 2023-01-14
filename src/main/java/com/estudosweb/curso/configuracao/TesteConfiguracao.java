@@ -9,11 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.estudosweb.curso.Repositorios.CategoriaRepositorio;
+import com.estudosweb.curso.Repositorios.PedidoItemRepositorio;
 import com.estudosweb.curso.Repositorios.PedidoRepositorio;
 import com.estudosweb.curso.Repositorios.ProdutoRepositorio;
 import com.estudosweb.curso.Repositorios.UsuarioRepositorio;
 import com.estudosweb.curso.entidades.Categoria;
 import com.estudosweb.curso.entidades.Pedido;
+import com.estudosweb.curso.entidades.PedidoItem;
 import com.estudosweb.curso.entidades.Produto;
 import com.estudosweb.curso.entidades.Usuario;
 import com.estudosweb.curso.entidades.enums.PedidoStatus;
@@ -33,6 +35,9 @@ public class TesteConfiguracao implements CommandLineRunner{
 
 	@Autowired
 	private ProdutoRepositorio produtoRepositorio;
+	
+	@Autowired
+	private PedidoItemRepositorio pedidoItemRepositorio;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -69,7 +74,12 @@ public class TesteConfiguracao implements CommandLineRunner{
 		usuarioRepositorio.saveAll(Arrays.asList(u1, u2));
 		pedidoRepositorio.saveAll(Arrays.asList(p1, p2, p3));
 		
+		PedidoItem pi1 = new PedidoItem(p1, pr1, 2, pr1.getPreco());
+		PedidoItem pi2 = new PedidoItem(p1, pr3, 1, pr3.getPreco());
+		PedidoItem pi3 = new PedidoItem(p2, pr3, 2, pr3.getPreco());
+		PedidoItem pi4 = new PedidoItem(p3, pr5, 2, pr5.getPreco());
 		
+		pedidoItemRepositorio.saveAll(Arrays.asList(pi1, pi2, pi3, pi4));
 	}
 
 }

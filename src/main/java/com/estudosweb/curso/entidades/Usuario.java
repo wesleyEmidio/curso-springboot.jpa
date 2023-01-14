@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -84,7 +86,8 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 	}
 	
-
+   
+	@JsonIgnore
 	public List<Pedido> getPedidos() {
 		return Pedidos;
 	}
