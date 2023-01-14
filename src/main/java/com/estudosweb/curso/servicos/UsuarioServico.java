@@ -13,14 +13,14 @@ import com.estudosweb.curso.entidades.Usuario;
 public class UsuarioServico {
 
 	@Autowired
-	private UsuarioRepositorio usuarioRepositorio;
+	private UsuarioRepositorio repositorio;
 	
 	public List<Usuario> retornaUsuarios(){
-		return usuarioRepositorio.findAll();
+		return repositorio.findAll();
 	}
 	
 	public Usuario retornaUsuarioPorId(Long id) {
-		Optional<Usuario> usuario = usuarioRepositorio.findById(id);
+		Optional<Usuario> usuario = repositorio.findById(id);
 		return usuario.get();
 	}
 }
