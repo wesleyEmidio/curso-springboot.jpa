@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.estudosweb.curso.Repositorios.UsuarioRepositorio;
 import com.estudosweb.curso.entidades.Usuario;
+import com.estudosweb.curso.servicos.excecoes.RecursoNaoEncontradoExcecao;
 
 @Service
 public class UsuarioServico {
@@ -21,7 +22,7 @@ public class UsuarioServico {
 	
 	public Usuario retornaUsuarioPorId(Long id) {
 		Optional<Usuario> usuario = repositorio.findById(id);
-		return usuario.get();
+		return usuario.orElseThrow(() -> new RecursoNaoEncontradoExcecao(id));
 	}
 	
 	public Usuario inserir(Usuario usuario) {
