@@ -3,10 +3,9 @@ package com.estudosweb.curso.recursos;
 import java.net.URI;
 import java.util.List;
 
-import javax.tools.DocumentationTool.Location;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,5 +43,11 @@ public class UsuarioRecurso {
 		usuario = servico.inserir(usuario);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(usuario.getId()).toUri();
 		return ResponseEntity.created(uri).body(usuario);
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> excluir(@PathVariable Long id){
+		servico.excluir(id);
+		return ResponseEntity.noContent().build();
 	}
 }
